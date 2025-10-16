@@ -1,0 +1,108 @@
+/* =======================
+   HERO — invisible 2×2 frame
+   (top-left / top-right / bottom-left / bottom-right)
+   ======================= */
+.hero-frame{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "tl tr"
+    "bl br";
+  gap: clamp(12px, 2.5vw, 24px);
+  width: min(50vw, 980px);            /* 요청: 프레임 ≈ 화면 70% */
+  min-height: 480px;
+  margin-left: auto;                   /* 화면 가운데 배치 */
+  margin-right: auto;
+  margin-top: 100px;                     /* 타이틀과 살짝 간격 */
+  position: relative;
+}
+
+/* ---- top-left block (logo + copy) ---- */
+.hero-top-left{
+  grid-area: tl;
+  place-self: start start;
+  text-align:left;                     /* 왼쪽 정렬 유지 */
+  max-width: 42ch;
+}
+.hero-top-left .mascot{
+  width: 52px; height: 52px;           /* 로고 크게 */
+  object-fit: contain;
+  display:block;
+  margin: 2px 0 8px;
+}
+.hero-subtitle{
+  font-weight:900;
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height:1.08;
+  margin: 6px 0 8px;
+}
+.lead{ color:#565656; line-height:1.6; }
+
+/* ---- phones pinned to corners (inside the frame only) ---- */
+.phone{
+  width: clamp(200px, 24vw, 300px);    /* 요청: 휴대폰 사이즈 살짝 축소 */
+  height:auto;
+  filter: drop-shadow(0 22px 48px rgba(0,0,0,.35));
+}
+.phone-top-right{ 
+  grid-area: tr; place-self: start end;
+}
+.phone-bottom-left{ grid-area: bl; place-self: end start; transform: translateY(6%); } /* 왼쪽 아래 모서리 */
+
+/* ---- bottom-right block (logo + copy, right-aligned) ---- */
+.hero-bottom-right{
+  grid-area: br;
+  place-self: end end;
+  text-align:right;                    /* 오른쪽 정렬 유지 */
+  max-width: 32ch;
+}
+.hero-bottom-right .mascot{
+  width: 52px; height: 52px;           /* 로고 크게 */
+  object-fit: contain;
+  display:block;
+  margin-left:auto;                    /* 아이콘도 오른쪽으로 */
+  margin-right:0;
+}
+.sss-title{
+  font-weight:900;
+  font-size: clamp(26px, 3.8vw, 36px);
+  line-height:1.06;
+  margin: 6px 0 4px;
+}
+.sss-desc{ color:#565656; }
+
+/* =======================
+   RESPONSIVE TUNING
+   ======================= */
+/* 태블릿/작은 노트북: 2×2 유지(문단 폭 좁게, 폰은 옆 자리 유지) */
+
+@media (max-width: 960px) and (min-width: 681px){
+  .hero-frame{
+    width: min(50vw, 860px);
+    gap: clamp(10px, 2vw, 18px);
+  }
+  .hero-top-left,
+  .hero-bottom-right{ max-width: 28ch; }
+  .phone{ width: clamp(180px, 30vw, 270px); }
+}
+
+/* 모바일(≤680px): 여전히 2열×2행 유지하여 옆 배치 느낌 보존 */
+@media (max-width: 680px){
+  .hero-frame{
+    width: 94vw;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "tl tr"
+      "bl br";
+    gap: 12px;
+  }
+  .hero-top-left,
+  .hero-bottom-right{
+    max-width: 24ch;
+    font-size: 0.98rem;
+  }
+  .phone{ width: 42vw; transform: none; }
+  .phone-top-right{ justify-self:end; align-self:start; }
+  .phone-bottom-left{ justify-self:start; align-self:end; }
+}

@@ -1,0 +1,182 @@
+:root{
+  --cream:#EDEAE0;
+  --ink:#1d1d1d;
+  --muted:#565656;
+  --orange:#FF7A00;
+  --shadow:0 24px 60px rgba(0,0,0,.28);
+
+  /* 폭/여백 토큰 */
+  --wrap: 1100px;
+  --narrow: 880px;
+  --padx: clamp(18px, 4vw, 48px);
+}
+
+/* Base */
+html,body{
+  margin:0;
+  background:
+    radial-gradient(900px 640px at 66% 26%, rgba(0,0,0,.06), transparent 60%),
+    var(--cream);
+  color:var(--ink);
+}
+body{
+  font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+.section{
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 28px var(--padx) 64px;
+}
+
+/* ===== Brand + Hero H1 중앙 정렬 ===== */
+.brand{
+  margin-bottom: 6px;
+  text-align: center;                 /* 가운데 */
+}
+.brand-title{
+  font-family:"Abril Fatface",serif;
+  font-weight:400;
+  color:var(--orange);
+  font-size:28px;
+  line-height:1;
+}
+.hero-title{
+  font-weight:900;
+  letter-spacing:-.018em;
+  font-size: clamp(44px, 7vw, 88px);
+  line-height:1.02;
+  margin: 8px auto 22px;              /* 중앙 배치 */
+  text-align:center;                   /* 가운데 */
+  max-width: 18ch;                     /* 폭 조절로 줄바꿈 안정화 */
+}
+
+/* ===== HERO FRAME: 2×2 무대 (축소 + 가운데) ===== */
+.hero-frame{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: clamp(16px, 3.2vw, 28px);       /* 모서리 간격 축소 */
+  min-height: 480px;                   /* 박스 크기 줄임 */
+  max-width: var(--narrow);            /* 중앙 좁은 폭 */
+  margin: 0 auto;                      /* 화면 중앙 */
+  position: relative;
+}
+
+/* top-left : 좌측 정렬 */
+.hero-top-left{
+  place-self:start start;
+  text-align:left;
+  max-width: 42ch;
+}
+.mascot{ width:34px; height:34px; object-fit:contain; display:block; margin: 2px 0 8px; }
+.hero-subtitle{ font-weight:900; font-size: clamp(28px, 4.2vw, 44px); line-height:1.08; margin: 6px 0 8px; }
+.lead{ color:var(--muted); line-height:1.6; }
+
+/* phones pinned to corners (프레임 내부만) */
+.phone{
+  width: clamp(220px, 28vw, 340px);
+  height:auto;
+  filter: drop-shadow(0 22px 48px rgba(0,0,0,.35));
+}
+.phone-top-right{ place-self: start end; }
+.phone-bottom-left{ place-self: end start; transform: translateY(6%); }
+
+/* bottom-right : 우측 정렬 */
+.hero-bottom-right{
+  place-self:end end;
+  text-align:right;                    /* 우측 정렬 */
+  max-width: 32ch;
+}
+.sss-title{ font-weight:900; font-size: clamp(26px, 3.8vw, 36px); line-height:1.06; margin: 6px 0 4px; }
+.sss-desc{ color:var(--muted); }
+
+/* ===== HOW: 세로 스택(steps → QR), 가운데 배치(콘텐츠), 좌측 정렬(텍스트) ===== */
+.how{
+  max-width: var(--narrow);            /* 콘텐츠 박스 폭 축소 */
+  margin: 0 auto;                      /* 화면 가운데 */
+  display: flex;
+  flex-direction: column;              /* 세로 스택 */
+  align-items: center;                 /* 박스 자체를 중앙 */
+  gap: 22px;
+}
+.steps{
+  width: 100%;
+  max-width: 720px;                    /* steps 폭 제한 */
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap: 24px;
+  text-align: left;                    /* 텍스트는 좌정렬 */
+}
+.step{
+  display:grid; grid-template-columns: 56px 1fr; gap:14px; align-items:flex-start;
+}
+.badge{
+  display:grid; place-items:center; width:56px; height:56px; border-radius:50%;
+  background:var(--orange); color:#fff; font-weight:900; font-size:22px; box-shadow:var(--shadow);
+}
+.step-copy h4{ margin:0 0 6px; font-weight:900; font-size: clamp(20px, 3.2vw, 28px);}
+.step-copy p{ margin:0; color:var(--muted); }
+
+.try{
+  width: 100%;
+  max-width: 720px;                    /* QR 박스도 같은 폭 */
+  text-align: center;                    /* 텍스트 좌정렬 */
+  margin-top: 8px;
+}
+.try h3{ font-weight:900; font-size: clamp(24px, 4vw, 30px); margin:8px 0 14px; }
+.qr{
+  width: clamp(180px, 34vw, 220px); height:auto;
+  background:#fff; border-radius: 14px; padding: 14px; box-shadow: var(--shadow);
+}
+.url{ color:var(--muted); }
+
+/* ===== TEAM: 콘텐츠는 중앙, 텍스트는 좌정렬 ===== */
+.section.team,
+.team{
+  /* 섹션 자체를 화면 중앙으로 */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 내부 아이템들을 중앙으로 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team-title{
+  font-weight:900; font-size: clamp(28px, 5vw, 36px);
+  margin: 10px 0 18px; text-align: left;
+}
+/* 개인 프로필 문단 덩어리들도 중앙으로 */
+.member{
+  width: 100%;
+  max-width: 68ch;            /* 본문 읽기 좋은 폭 */
+  margin: 0 auto 28px;
+  text-align: left;
+}
+.member h3{ font-weight:900; font-size: clamp(20px, 3.8vw, 22px); margin: 12px 0 8px; }
+.member p{ color:var(--muted); margin: 8px 0; }
+
+/* ===== CTA ===== */
+.cta{ text-align:center; padding-top: 8px; }
+.cta-big{ font-weight:900; font-size: clamp(28px, 6vw, 36px); line-height:1.1; margin: 10px 0 20px; }
+.btn-cta{
+  display:inline-block; padding:12px 24px; border-radius:26px; background:var(--orange);
+  color:#fff; font-weight:900; text-decoration:none; box-shadow:0 10px 22px rgba(255,122,0,.35);
+}
+
+/* Reveal (optional) */
+.reveal{ opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in{ opacity:1; transform: translateY(0); }
+
+/* ===== Responsive ===== */
+@media (max-width: 960px){
+  .hero-frame{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 18px;
+    min-height: unset;
+  }
+  .hero-top-left{ order:1; place-self:auto; text-align:left; }
+  .phone-top-right{ order:2; place-self:center; }
+  .phone-bottom-left{ order:3; place-self:center; transform:none; }
+  .hero-bottom-right{ order:4; place-self:auto; text-align:right; }
+}

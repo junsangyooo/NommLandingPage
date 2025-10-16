@@ -131,22 +131,33 @@ body{
 }
 
 /* ---- bottom-right block (logo + copy, right-aligned) ---- */
+/* ---- bottom-right block (항상 아래선에 고정) ---- */
 .hero-bottom-right{
   grid-area: br;
-  align-self: end;                      /* 2행: 아랫선 맞춤 */
-  place-self: end end;
-  text-align: right;
-  max-width: 32ch;
 
-  /* 오른쪽 컬럼 ‘끝선’ 정렬 */
-  justify-self: stretch;
+  /* 셀 높이를 꽉 채워 내부 콘텐츠를 아래로 밀착 */
+  align-self: stretch;           /* 셀 전체 높이 사용 */
+  justify-self: stretch;         /* 우측 끝선까지 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;     /* 내용물을 바닥으로 고정 */
+
+  text-align: right;
+  width: 100%;
+  max-width: none;               /* 우측 끝선 정렬 방해 제거 */
   padding-right: var(--hero-gutter);
+  padding-bottom: 10px;          /* 시각적 보정(폰 그림자 대비) */
 }
+
 .hero-bottom-right .mascot{
   width: 60px; height: 60px;
-  object-fit: contain; display:block;
-  margin-left: auto; margin-right: 0;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;             /* 아이콘도 오른쪽 끝으로 */
+  margin-right: 0;
 }
+
+
 .sss-title{
   font-weight:900;
   font-size: clamp(28px, 4.2vw, 44px);
